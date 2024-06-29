@@ -1,0 +1,98 @@
+Weather Dashboard App
+_______________________________________
+
+Outline
+
+* Side Nav
+    * Dashboard
+    * Current Conditions
+    * Forecast
+    * Weather Map
+    * Featured Metrics
+    * Developer Info Link
+
+* Dashboard
+    * Header
+        * Search
+        * Current City
+        * Local Time
+        * Featured Cities
+    * Data Display
+        * Current Conditions
+        * Forecast
+        * Weather Map
+        * Featured Metrics
+_______________________________________
+
+Details
+
+* Current Conditions
+    * Current Temperature
+    * High/Low Temperature
+    * Conditions
+    * Percipitation
+
+* Forecast
+    * Hourly Forecast
+    * 5-Day Forecast
+
+* Weather Map
+
+* Featured Metrics
+    * Wind Speed
+    * Heat Index
+    * Humidity
+_______________________________________
+
+* Miscellaneous
+    * Fonts
+    * Icons
+    * Error Handling
+    * Skeletons and Suspension
+    * Loading Animation
+    * 404 Page
+
+* Links
+    * NextJS
+        * https://nextjs.org/docs
+    * Tailwind CSS
+        * https://tailwindui.com/documentation
+    * Google Fonts
+        * https://fonts.google.com/
+    * Icons
+        * FontAwesome
+            * https://fontawesome.com/icons
+            * https://docs.fontawesome.com/web/use-with/react/
+        * https://heroicons.com/
+        * https://boxicons.com/
+    * API's
+        * OpenWeatherMap API
+            * https://openweathermap.org/api
+            * Weather Conditions
+                * https://openweathermap.org/weather-conditions
+                * https://openweathermap.org/img/wn/10d@2x.png
+        * Google Place Autocomplete API
+            * https://developers.google.com/maps/documentation/places/web-service/autocomplete
+            * https://maps.googleapis.com/maps/api/place/autocomplete/json
+    * Vercel
+        * https://vercel.com/simonanewtons-projects
+    * Dribbble
+        * https://dribbble.com/tags/weather-web-app#
+
+* OpenWeatherMap API
+    * Geocoding
+        * https://openweathermap.org/api/geocoding-api
+        * http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_code},{country_code}&limit={limit}&appid={API_KEY}
+    * Currente Weather
+        * https://openweathermap.org/current
+        * https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}
+    * Forecast
+        * Hourly Forecast
+            * https://openweathermap.org/api/hourly-forecast
+            * https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={latitude}&lon={longitude}&appid={API_KEY}
+        * 5-Day Forecast
+            * https://openweathermap.org/forecast5
+            * https://api.openweathermap.org/data/2.5/forecast?lat={latitudew}&lon={longitude}&appid={API_KEY}
+    * Weather Map
+        * https://openweathermap.org/api/weathermaps
+        * https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png?appid={API_KEY}
