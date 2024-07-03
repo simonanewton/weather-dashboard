@@ -1,7 +1,7 @@
 import '@/app/globals.css';
 
 export const metadata = {
-    title: 'Next.js Weather Dashboard App',
+    title: 'Weather Dashboard',
     description: 'Dashboard displaying weather data by location',
 }
 
