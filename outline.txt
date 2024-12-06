@@ -83,7 +83,7 @@ _______________________________________
     * Geocoding
         * https://openweathermap.org/api/geocoding-api
         * http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_code},{country_code}&limit={limit}&appid={API_KEY}
-    * Currente Weather
+    * Current Weather
         * https://openweathermap.org/current
         * https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}
     * Forecast
