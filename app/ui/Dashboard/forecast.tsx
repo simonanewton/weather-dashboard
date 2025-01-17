@@ -25,14 +25,14 @@ let fiveDayForecast: ForecastBlock[] = [
 
 const Forecast = () => {
     return (
-        <div className="p-12 content-center">
-            <p className="pb-5 text-xl font-semibold text-center">Hourly Forecast</p>
-            <div className="grid grid-cols-5 justify-center gap-5">
+        <div className="px-6 py-4 content-center">
+            <p className="pb-3 text-lg font-semibold text-center">Hourly Forecast</p>
+            <div className="grid grid-cols-5 justify-center gap-5 w-10/12 mx-auto">
                 {hourlyForecast.map(data => <ForecastBlock key={data.title} title={data.title} icon={data.icon} temperature={data.temperature} />)}
             </div>
 
-            <p className="py-5 text-xl font-semibold text-center">Weekly Forecast</p>
-            <div className="grid grid-cols-5 justify-center gap-5">
+            <p className="py-3 text-lg font-semibold text-center">Weekly Forecast</p>
+            <div className="grid grid-cols-5 justify-center gap-5 w-10/12 mx-auto">
                 {fiveDayForecast.map(data => <ForecastBlock key={data.title} title={data.title.slice(0, 3)} icon={data.icon} temperature={data.temperature} />)}
             </div>
         </div>

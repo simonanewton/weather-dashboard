@@ -4,9 +4,9 @@ const cities: string[] = ["Atlanta, Georgia", "Los Angeles, California", "Dallas
 
 const Featured = () => {
     return (
-        <div className="p-8">
-            <p className="pb-5 text-2xl font-semibold text-center">Featured Cities</p>
-            <div className="grid grid-rows-3 grid-flow-col gap-4">
+        <div className="px-8 py-4 content-center">
+            <p className="pb-3 text-lg font-semibold text-center">Featured Cities</p>
+            <div className="grid grid-rows-3 grid-cols-2 gap-5 w-11/12 mx-auto">
                 {cities.map(city => <FeaturedBlock key={city} name={city} />)}
             </div>
         </div>

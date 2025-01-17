@@ -1,24 +1,34 @@
 import { faSmog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// Sunny - faSun, faMoon
+// Partly Cloudy - faCloudSun, faCloudMoon
+// Cloudy - faCloud
+// Rain - faCloudShowersHeavy
+// Thunderstorm - faCloudBolt
+// Snow - faSnowflake
+// Mist/Fog - faSmog
+
 const Conditions = () => {
     return (
-        <div className="px-20 flex justify-between">
-            <div className="flex flex-col justify-center">
-                <div className="pb-16">
-                    <p className="text-4xl font-semibold">Monday</p>
-                    <p className="text-xl">December 15th, 2024</p>
+        <div className="p-8 flex justify-around items-center">
+            <div className="space-y-10">
+                <div>
+                    <p className="text-2xl font-semibold">Monday</p>
+                    <p className="text-lg">December 15th, 2024</p>
                 </div>
                 <div>
-                    <p className="text-6xl font-semibold">71°F</p>
-                    <p className="text-xl">High: 73°F Low: 61°F</p>
+                    <p className="text-3xl font-semibold">71°F</p>
+                    <p className="text-lg">High 73°F Low 61°F</p>
                 </div>
             </div>
-            <div className="flex flex-col justify-center">
-                <FontAwesomeIcon className="pb-16" icon={faSmog} size="7x" />
+            <div className="space-y-14">
+                <div className="justify-self-center">
+                    <FontAwesomeIcon className="" icon={faSmog} size="4x" />
+                </div>
                 <div>
-                    <p className="text-2xl font-semibold">Partly Cloudy</p>
-                    <p className="text-xl">Feels Like: 70°F</p>
+                    <p className="text-xl font-semibold">Partly Cloudy</p>
+                    <p className="text-lg">Feels Like 70°F</p>
                 </div>
             </div>
         </div>
