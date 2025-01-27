@@ -1,13 +1,50 @@
-import { faSmog } from "@fortawesome/free-solid-svg-icons";
+import { faCloud, faCloudBolt, faCloudShowersHeavy, faCloudSun, faSmog, faSnowflake, faSun, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// Sunny - faSun, faMoon
-// Partly Cloudy - faCloudSun, faCloudMoon
-// Cloudy - faCloud
-// Rain - faCloudShowersHeavy
-// Thunderstorm - faCloudBolt
-// Snow - faSnowflake
-// Mist/Fog - faSmog
+const matchIcon = (conditions: string): [string, IconDefinition] => {
+    let description: string;
+    let icon: IconDefinition;
+
+    switch (conditions) {
+        case "clear sky":
+            description = "Clear Sky";
+            icon = faSun; // faMoon
+            break;
+        case "partly cloudy":
+            description = "Partly Cloudy";
+            icon = faCloudSun; // faCloudMoon
+            break;
+        case "scattered clouds":
+        case "broken clouds":
+            description = "Cloudy";
+            icon = faCloud;
+            break;
+        case "shower rain":
+        case "rain":
+            description = "Rainy";
+            icon = faCloudShowersHeavy;
+            break;
+        case "thunderstorm":
+            description = "Stormy"
+            icon = faCloudBolt;
+            break;
+        case "snow":
+            description = "Snowy";
+            icon = faSnowflake;
+            break;
+        case "mist":
+            description = "Foggy";
+            icon = faSmog;
+            break;
+        default:
+            description = "Default";
+            icon = faCloud;
+            break;
+    }
+
+    const weather: [string, IconDefinition] = [description, icon];
+    return weather;
+}
 
 const Conditions = () => {
     return (

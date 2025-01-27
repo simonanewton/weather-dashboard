@@ -1,14 +1,13 @@
-import API, { APIResponse } from "./api/api";
+// import { useEffect, useState } from "react";
 import Dashboard from "./ui/Dashboard/page";
 import Header from "./ui/Header/page";
+import callAPI from "./api/api";
 
-let weatherData: APIResponse | undefined;
-
-const loadWeatherData = async () => {
+const loadWeatherData = async (location: string) => {
     try {
-        weatherData = await API.fetchCurrentWeather();
+        const response = await callAPI(location);
         console.log("Successfully fetched data from backend.");
-        console.log(weatherData);
+        console.log(response);
     }
 
     catch (error) {
@@ -16,7 +15,7 @@ const loadWeatherData = async () => {
     }
 }
 
-loadWeatherData();
+// loadWeatherData("Atlanta");
 
 export default function Home() {
     return (
