@@ -1,10 +1,10 @@
-const authKey = process.env.WEATHER_API_KEY as string;
+const authKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
 if (!authKey) throw new Error("WEATHER_API_KEY is undefined.");
 
 type APIResponse = Record<string, any>;
 type filteredForecast = { time: number, conditions: string, temperature: number }[];
 
-type payload = {
+export type payload = {
     information: {
         location: string,
         state?: string,
