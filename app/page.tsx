@@ -1,9 +1,12 @@
 'use client';
 import { useState, useEffect } from "react";
-import Dashboard from "./ui/Dashboard/page";
-import Header from "./ui/Header/page";
 import callAPI, { payload } from "./api/api";
 import { LocationContext } from "./api/context";
+import Conditions from "./ui/Dashboard/conditions";
+import Forecast from "./ui/Dashboard/forecast";
+import Statistics from "./ui/Dashboard/stats";
+import Featured from "./ui/Dashboard/featured";
+import Header from "./ui/Dashboard/header";
 
 const Home = () => {
     const [location, updateLocation] = useState<string>("Atlanta");
@@ -35,7 +38,12 @@ const Home = () => {
             <div className="container min-h-full mx-auto flex flex-col border-solid border-2 divide-y">
                 <LocationContext.Provider value={updateLocation}>
                     <Header city={weather.information.location} country={weather.information.country} />
-                    <Dashboard data={weather} />
+                    <div className="grid grid-cols-1 basis-full xl:grid-cols-2 xl:basis4/5 divide-x divide-y">
+                        <Conditions data={weather} />
+                        <Forecast data={weather} />
+                        <Statistics data={weather} />
+                        <Featured />
+                    </div>
                 </LocationContext.Provider>
             </div>
         </main>

@@ -1,5 +1,5 @@
 import { faCloud, faCloudBolt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import ForecastBlock from "./forecast-block";
+import ForecastBlock from "../Subcomponents/forecast-block";
 import { payload } from "@/app/api/api";
 
 type ForecastBlock = {

@@ -2,7 +2,7 @@ import { faArrowsDownToLine, faClock, faDroplet, faEye, faWind } from "@fortawes
 import { faClock as faClockAlt } from "@fortawesome/free-regular-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { payload } from "@/app/api/api";
-import StatsBlock from "./stats-block";
+import StatsBlock from "../Subcomponents/stats-block";
 
 const convertUnixtoTime = (unixTimestamp: number, timezoneOffset: number) => {
     const adjustedTimestamp = unixTimestamp + timezoneOffset;
