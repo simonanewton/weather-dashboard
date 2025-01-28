@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from "react";
-import { LocationContext } from "../../page";
+import { LocationContext } from "@/app/api/context";
 
 const FeaturedBlock = ({ name }: { name: [string, string] }) => {
     let updateLocation = useContext(LocationContext);

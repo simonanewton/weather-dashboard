@@ -1,12 +1,9 @@
 'use client';
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "./ui/Dashboard/page";
 import Header from "./ui/Header/page";
 import callAPI, { payload } from "./api/api";
-
-type LocationContextType = React.Dispatch<React.SetStateAction<string>>;
-
-export const LocationContext = createContext<LocationContextType | undefined>(undefined);
+import { LocationContext } from "./api/context";
 
 const Home = () => {
     const [location, updateLocation] = useState<string>("Atlanta");
@@ -16,11 +13,8 @@ const Home = () => {
     useEffect(() => {
         const fetchWeatherData = async () => {
             try {
-                // setIsLoading(true);
                 const response = await callAPI(location);
                 updateWeather(response);
-                // console.log("Successfully fetched data from backend");
-                // console.log(response);
             }
 
             catch (error) {
