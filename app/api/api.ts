@@ -1,7 +1,5 @@
-import {
-    faCloud, faCloudBolt, faCloudShowersHeavy, faCloudMoonRain, faCloudSun,
-    faCloudMoon, faSmog, faSnowflake, faSun, faMoon, IconDefinition
-} from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { filterHourlyForecast, filterWeeklyForecast, matchIcon } from "./utils";
 
 const authKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
 if (!authKey) throw new Error("WEATHER_API_KEY is undefined.");
@@ -101,72 +99,6 @@ const fetchFiveDayForecast = async (latitude: number, longitude: number): Promis
     }
 }
 
-const filterHourlyForecast = (forecastArray: any): filteredForecast => {
-    const filteredArray: filteredForecast = [];
-    const numTimestamps = 5;
-
-    for (let i = 0; i < numTimestamps; i++) {
-        filteredArray.push({
-            time: forecastArray[i].dt,
-            conditions: forecastArray[i].weather[0].description,
-            temperature: forecastArray[i].main.temp
-        });
-    }
-
-    return filteredArray;
-}
-
-const filterWeeklyForecast = (forecastArray: any): filteredForecast => {
-    const filteredArray: filteredForecast = [];
-
-    for (let i = 0; i < forecastArray.length; i++) {
-        if (forecastArray[i].dt_txt.slice(11) === "12:00:00") {
-            filteredArray.push({
-                time: forecastArray[i].dt,
-                conditions: forecastArray[i].weather[0].description,
-                temperature: forecastArray[i].main.temp
-            });
-        }
-    }
-
-    return filteredArray;
-}
-
-const matchIcon = (conditions: string, time: number, sunrise: number, sunset: number): IconDefinition => {
-    let darkOutside: boolean = time < sunrise || time >= sunset;
-    let icon: IconDefinition;
-
-    switch (conditions) {
-        case "clear sky":
-            icon = darkOutside ? faMoon : faSun;
-            break;
-        case "partly cloudy":
-        case "scattered clouds":
-            icon = darkOutside ? faCloudMoon : faCloudSun;
-            break;
-        case "broken clouds":
-            icon = faCloud;
-            break;
-        case "shower rain":
-        case "rain":
-            icon = darkOutside ? faCloudMoonRain : faCloudShowersHeavy;
-            break;
-        case "thunderstorm":
-            icon = faCloudBolt;
-            break;
-        case "snow":
-            icon = faSnowflake;
-            break;
-        case "mist":
-            icon = faSmog;
-            break;
-        default:
-            icon = faCloud;
-            break;
-    }
-    return icon;
-}
-
 const callAPI = async (location: string): Promise<payload> => {
     try {
         const locationData = (await fetchGeocoding(location))[0];
@@ -186,7 +118,6 @@ const callAPI = async (location: string): Promise<payload> => {
                 feels: Math.round(currentData.main.feels_like),
                 high: Math.round(currentData.main.temp_min),
                 low: Math.round(currentData.main.temp_max),
-                // conditions: matchIcon(currentData.weather[0].description),
                 conditions: matchIcon(currentData.weather[0].description, currentData.dt, currentData.sys.sunrise, currentData.sys.sunset),
                 description: currentData.weather[0].main,
                 pressure: Math.round(currentData.main.pressure * 0.02953),

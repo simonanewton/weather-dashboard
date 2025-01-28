@@ -1,3 +1,73 @@
+import { faMoon, faSun, faCloudMoon, faCloudSun, faCloud, faCloudMoonRain, faCloudShowersHeavy, faCloudBolt, faSnowflake, faSmog, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
+type filteredForecast = { time: number, conditions: string, temperature: number }[];
+
+export const filterHourlyForecast = (forecastArray: any): filteredForecast => {
+    const filteredArray: filteredForecast = [];
+    const numTimestamps = 5;
+
+    for (let i = 0; i < numTimestamps; i++) {
+        filteredArray.push({
+            time: forecastArray[i].dt,
+            conditions: forecastArray[i].weather[0].description,
+            temperature: forecastArray[i].main.temp
+        });
+    }
+
+    return filteredArray;
+}
+
+export const filterWeeklyForecast = (forecastArray: any): filteredForecast => {
+    const filteredArray: filteredForecast = [];
+
+    for (let i = 0; i < forecastArray.length; i++) {
+        if (forecastArray[i].dt_txt.slice(11) === "12:00:00") {
+            filteredArray.push({
+                time: forecastArray[i].dt,
+                conditions: forecastArray[i].weather[0].description,
+                temperature: forecastArray[i].main.temp
+            });
+        }
+    }
+
+    return filteredArray;
+}
+
+export const matchIcon = (conditions: string, time: number, sunrise: number, sunset: number): IconDefinition => {
+    let darkOutside: boolean = time < sunrise || time >= sunset;
+    let icon: IconDefinition;
+
+    switch (conditions) {
+        case "clear sky":
+            icon = darkOutside ? faMoon : faSun;
+            break;
+        case "partly cloudy":
+        case "scattered clouds":
+            icon = darkOutside ? faCloudMoon : faCloudSun;
+            break;
+        case "broken clouds":
+            icon = faCloud;
+            break;
+        case "shower rain":
+        case "rain":
+            icon = darkOutside ? faCloudMoonRain : faCloudShowersHeavy;
+            break;
+        case "thunderstorm":
+            icon = faCloudBolt;
+            break;
+        case "snow":
+            icon = faSnowflake;
+            break;
+        case "mist":
+            icon = faSmog;
+            break;
+        default:
+            icon = faCloud;
+            break;
+    }
+    return icon;
+}
+
 // convert a unix timestamp to the day of the week with respect to timezone, ex. 'Monday'
 export const convertUnixtoWeekday = (unixTimestamp: number, timezoneOffset: number): string => {
     const adjustedTimestamp = unixTimestamp + timezoneOffset;
