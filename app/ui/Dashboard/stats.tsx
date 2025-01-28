@@ -30,7 +30,7 @@ const Statistics = ({ data }: { data: payload }) => {
     return (
         <div className="p-8 content-center">
             <div className="grid grid-rows-2 grid-cols-3 gap-4">
-                {stats.map(stat => <StatsBlock data={stat} />)}
+                {stats.map(stat => <StatsBlock key={stat.title} data={stat} />)}
             </div>
         </div>
     );
