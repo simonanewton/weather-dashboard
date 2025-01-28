@@ -39,7 +39,7 @@ export type payload = {
 
 const fetchGeocoding = async (location: string): Promise<APIResponse> => {
     const queryParams: string = new URLSearchParams({ q: location, appid: authKey }).toString();
-    const queryURL: string = `http://api.openweathermap.org/geo/1.0/direct?${queryParams}`;
+    const queryURL: string = `https://api.openweathermap.org/geo/1.0/direct?${queryParams}`;
 
     try {
         const response = await fetch(queryURL);
