@@ -1,3 +1,8 @@
+import {
+    faCloud, faCloudBolt, faCloudShowersHeavy, faCloudMoonRain, faCloudSun,
+    faCloudMoon, faSmog, faSnowflake, faSun, faMoon, IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+
 const authKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
 if (!authKey) throw new Error("WEATHER_API_KEY is undefined.");
 
@@ -9,14 +14,15 @@ export type payload = {
         location: string,
         state?: string,
         country: string,
-        date: number
+        date: number,
+        timezone: number
     },
     weather: {
         temperature: number,
         feels: number,
         high: number,
         low: number,
-        conditions: string,
+        conditions: IconDefinition,
         description: string,
         pressure: number,
         humidity: number,
@@ -126,6 +132,41 @@ const filterWeeklyForecast = (forecastArray: any): filteredForecast => {
     return filteredArray;
 }
 
+const matchIcon = (conditions: string, time: number, sunrise: number, sunset: number): IconDefinition => {
+    let darkOutside: boolean = time < sunrise || time >= sunset;
+    let icon: IconDefinition;
+
+    switch (conditions) {
+        case "clear sky":
+            icon = darkOutside ? faMoon : faSun;
+            break;
+        case "partly cloudy":
+        case "scattered clouds":
+            icon = darkOutside ? faCloudMoon : faCloudSun;
+            break;
+        case "broken clouds":
+            icon = faCloud;
+            break;
+        case "shower rain":
+        case "rain":
+            icon = darkOutside ? faCloudMoonRain : faCloudShowersHeavy;
+            break;
+        case "thunderstorm":
+            icon = faCloudBolt;
+            break;
+        case "snow":
+            icon = faSnowflake;
+            break;
+        case "mist":
+            icon = faSmog;
+            break;
+        default:
+            icon = faCloud;
+            break;
+    }
+    return icon;
+}
+
 const callAPI = async (location: string): Promise<payload> => {
     try {
         const locationData = (await fetchGeocoding(location))[0];
@@ -137,19 +178,21 @@ const callAPI = async (location: string): Promise<payload> => {
                 location: locationData.name,
                 state: locationData.state || "N/A",
                 country: locationData.country,
-                date: currentData.dt
+                date: currentData.dt,
+                timezone: currentData.timezone
             },
             weather: {
-                temperature: currentData.main.temp,
-                feels: currentData.main.feels_like,
-                high: currentData.main.temp_min,
-                low: currentData.main.temp_max,
-                conditions: currentData.weather[0].description,
+                temperature: Math.round(currentData.main.temp),
+                feels: Math.round(currentData.main.feels_like),
+                high: Math.round(currentData.main.temp_min),
+                low: Math.round(currentData.main.temp_max),
+                // conditions: matchIcon(currentData.weather[0].description),
+                conditions: matchIcon(currentData.weather[0].description, currentData.dt, currentData.sys.sunrise, currentData.sys.sunset),
                 description: currentData.weather[0].main,
-                pressure: currentData.main.pressure,
+                pressure: Math.round(currentData.main.pressure * 0.02953),
                 humidity: currentData.main.humidity,
-                visibility: currentData.visibility,
-                windSpeed: currentData.wind.speed,
+                visibility: Math.round(currentData.visibility * 0.000621371),
+                windSpeed: Math.round(currentData.wind.speed),
                 sunrise: currentData.sys.sunrise,
                 sunset: currentData.sys.sunset
             },

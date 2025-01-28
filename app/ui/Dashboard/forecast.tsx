@@ -1,5 +1,6 @@
 import { faCloud, faCloudBolt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import ForecastBlock from "./forecast-block";
+import { payload } from "@/app/api/api";
 
 type ForecastBlock = {
     title: string,
@@ -23,7 +24,7 @@ let fiveDayForecast: ForecastBlock[] = [
     { title: "Friday", icon: faCloudBolt, temperature: 75 }
 ];
 
-const Forecast = () => {
+const Forecast = ({ data }: { data: payload }) => {
     return (
         <div className="px-6 py-4 content-center">
             <p className="pb-3 text-lg font-semibold text-center">Hourly Forecast</p>
