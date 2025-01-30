@@ -1,14 +1,15 @@
 'use client';
 import { useState, useEffect } from "react";
-import callAPI, { payload } from "./api/api";
-import { LocationContext } from "./api/context";
-import Conditions from "./ui/Dashboard/conditions";
-import Forecast from "./ui/Dashboard/forecast";
-import Statistics from "./ui/Dashboard/stats";
-import Featured from "./ui/Dashboard/featured";
-import Header from "./ui/Dashboard/header";
+import callAPI, { payload } from "@/app/api/api";
+import { LocationContext } from "@/app/utils/context";
+import Conditions from "@/app/ui/Components/conditions";
+import Forecast from "@/app/ui/Components/forecast";
+import Statistics from "@/app/ui/Components/stats";
+import Featured from "@/app/ui/Components/featured";
+import Header from "@/app/ui/Components/header";
 
 const Home = () => {
+    // states for current location, weather payload data, and initial application load
     const [location, updateLocation] = useState<string>("Atlanta");
     const [weather, updateWeather] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -31,6 +32,7 @@ const Home = () => {
         fetchWeatherData();
     }, [location]);
 
+    // if initial API response data isn't ready yet, display temporary loading screen
     if (isLoading) return (<div>Loading...</div>);
 
     return (

@@ -1,4 +1,4 @@
-import FeaturedBlock from "../Subcomponents/featured-block";
+import FeaturedBlock from "@/app/ui/Subcomponents/featured-block";
 
 const cities: [string, string][] = [
     ['Atlanta', 'Georgia'],

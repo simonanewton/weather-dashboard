@@ -1,12 +1,14 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { filterHourlyForecast, filterWeeklyForecast, matchIcon } from "./utils";
+import { filterHourlyForecast, filterWeeklyForecast, matchIcon } from "@/app/utils/utils";
 
+// checks for authentication key before proceeding with API calls
 const authKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
 if (!authKey) throw new Error("WEATHER_API_KEY is undefined.");
 
 type APIResponse = Record<string, any>;
 type filteredForecast = { time: number, conditions: string, temperature: number }[];
 
+// outline for information used throughout the app, state key is optional
 export type payload = {
     information: {
         location: string,
@@ -35,6 +37,7 @@ export type payload = {
     }
 }
 
+// returns name, state, country, and coordinates for given city name
 const fetchGeocoding = async (location: string): Promise<APIResponse> => {
     const queryParams: string = new URLSearchParams({ q: location, appid: authKey }).toString();
     const queryURL: string = `https://api.openweathermap.org/geo/1.0/direct?${queryParams}`;
@@ -53,6 +56,7 @@ const fetchGeocoding = async (location: string): Promise<APIResponse> => {
     }
 }
 
+// retrns data for current weather conditions for given city coordinates
 const fetchCurrentWeather = async (latitude: number, longitude: number): Promise<APIResponse> => {
     const queryParams: string = new URLSearchParams({
         lat: latitude.toString(),
@@ -76,6 +80,7 @@ const fetchCurrentWeather = async (latitude: number, longitude: number): Promise
     }
 }
 
+// returns an array of weather data for the next five days in three hour segments for given city coordinates
 const fetchFiveDayForecast = async (latitude: number, longitude: number): Promise<APIResponse> => {
     const queryParams: string = new URLSearchParams({
         lat: latitude.toString(),
@@ -99,6 +104,7 @@ const fetchFiveDayForecast = async (latitude: number, longitude: number): Promis
     }
 }
 
+// aggregates geocoding data, current weather data, and forecasted data into a weather payload to be used throughout the dashboard
 const callAPI = async (location: string): Promise<payload> => {
     try {
         const locationData = (await fetchGeocoding(location))[0];

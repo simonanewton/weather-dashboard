@@ -2,6 +2,7 @@ import { faMoon, faSun, faCloudMoon, faCloudSun, faCloud, faCloudMoonRain, faClo
 
 type filteredForecast = { time: number, conditions: string, temperature: number }[];
 
+// filters a five day forecast into time, conditions, and temperature for the first five timestamps
 export const filterHourlyForecast = (forecastArray: any): filteredForecast => {
     const filteredArray: filteredForecast = [];
     const numTimestamps = 5;
@@ -17,6 +18,7 @@ export const filterHourlyForecast = (forecastArray: any): filteredForecast => {
     return filteredArray;
 }
 
+// filters a five day forecast array into to time, conditions, and temperature for each day at noon
 export const filterWeeklyForecast = (forecastArray: any): filteredForecast => {
     const filteredArray: filteredForecast = [];
 
@@ -33,6 +35,7 @@ export const filterWeeklyForecast = (forecastArray: any): filteredForecast => {
     return filteredArray;
 }
 
+// matches conditions descriptor with corresponding FontAwesome Icon, uses sunrise and sunset timstamps to support nighttime icons
 export const matchIcon = (conditions: string, time: number, sunrise: number, sunset: number): IconDefinition => {
     let darkOutside: boolean = time < sunrise || time >= sunset;
     let icon: IconDefinition;
