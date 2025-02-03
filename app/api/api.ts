@@ -1,12 +1,13 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { filterHourlyForecast, filterWeeklyForecast, matchIcon } from "@/app/utils/utils";
+import { matchIcon, filterHourlyForecast, filterWeeklyForecast } from "@/app/utils/utils";
 
 // checks for authentication key before proceeding with API calls
 const authKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
 if (!authKey) throw new Error("WEATHER_API_KEY is undefined.");
 
+//---------------------------------------------------------------------------------------------------------------------
 type APIResponse = Record<string, any>;
-type filteredForecast = { time: number, conditions: string, temperature: number }[];
+type filteredForecast = { time: string, conditions: IconDefinition, temperature: number }[];
 
 // outline for information used throughout the app, state key is optional
 export type payload = {
@@ -37,6 +38,7 @@ export type payload = {
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // returns name, state, country, and coordinates for given city name
 const fetchGeocoding = async (location: string): Promise<APIResponse> => {
     const queryParams: string = new URLSearchParams({ q: location, appid: authKey }).toString();
@@ -104,6 +106,7 @@ const fetchFiveDayForecast = async (latitude: number, longitude: number): Promis
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // aggregates geocoding data, current weather data, and forecasted data into a weather payload to be used throughout the dashboard
 const callAPI = async (location: string): Promise<payload> => {
     try {
@@ -134,8 +137,8 @@ const callAPI = async (location: string): Promise<payload> => {
                 sunset: currentData.sys.sunset
             },
             forecast: {
-                hourly: filterHourlyForecast(forecastData.list),
-                weekly: filterWeeklyForecast(forecastData.list)
+                hourly: filterHourlyForecast(forecastData),
+                weekly: filterWeeklyForecast(forecastData)
             }
         }
 
