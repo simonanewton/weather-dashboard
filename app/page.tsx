@@ -36,8 +36,8 @@ const Home = () => {
     if (isLoading) return (<div>Loading...</div>);
 
     return (
-        <main className="h-dvh">
-            <div className="container min-h-full mx-auto flex flex-col border-solid border-2 divide-y">
+        <main className="h-dvh flex flex-col">
+            <div className="container flex-1 mx-auto flex flex-col border-solid border-2 divide-y">
                 <LocationContext.Provider value={updateLocation}>
                     <Header city={weather.information.location} country={weather.information.country} />
                     <div className="grid grid-cols-1 basis-full xl:grid-cols-2 xl:basis4/5 divide-x divide-y">

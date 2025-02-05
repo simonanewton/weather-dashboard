@@ -4,7 +4,7 @@ import { convertUnixtoWeekday, convertUnixtoDate, convertUnixtoTime } from "@/ap
 
 const Conditions = ({ data }: { data: payload }) => {
     return (
-        <div className="p-8 flex justify-around items-center">
+        <div className="py-8 flex justify-around items-center">
             <div className="space-y-10">
                 <div>
                     <p className="text-2xl font-semibold">{convertUnixtoWeekday(data.information.date, data.information.timezone)}</p>
