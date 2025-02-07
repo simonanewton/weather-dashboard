@@ -28,7 +28,7 @@ const Statistics = ({ data }: { data: payload }) => {
     ];
 
     return (
-        <div className="px-4 py-4 sm:px-8 sm:py-4 content-center">
+        <div className="px-4 py-4 sm:px-8 sm:py-4 content-center border-solid border-2 rounded-2xl">
             <div className="grid grid-rows-2 grid-cols-2 md:grid-cols-3 gap-4">
                 {stats.map(stat => <StatsBlock key={stat.title} data={stat} />)}
             </div>

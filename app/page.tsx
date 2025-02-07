@@ -37,10 +37,10 @@ const Home = () => {
 
     return (
         <main className="h-dvh flex flex-col">
-            <div className="container flex-1 mx-auto flex flex-col border-solid border-2 divide-y">
+            <div className="container pb-4 flex-1 mx-auto flex flex-col">
                 <LocationContext.Provider value={updateLocation}>
                     <Header city={weather.information.location} country={weather.information.country} />
-                    <div className="grid grid-cols-1 basis-full xl:grid-cols-2 xl:basis4/5 divide-x divide-y">
+                    <div className="grid grid-cols-1 basis-full xl:grid-cols-2 xl:basis4/5 gap-4">
                         <Conditions data={weather} />
                         <Forecast data={weather} />
                         <Statistics data={weather} />
